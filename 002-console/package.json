@@ -1,0 +1,19 @@
+{
+  "name": "002-console",
+  "version": "1.0.0",
+  "description": "",
+  "main": "task1.js",
+  "scripts": {
+    "cmd": "node task1.js",
+    "readline": "node task2.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^17.7.2"
+  },
+  "engines": {
+    "node": ">=18.19.0"
+  }
+}
