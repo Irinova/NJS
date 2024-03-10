@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "API_KEY=1287981e5f9342339bf111646241003 node --env-file=.env index.ts",
+    "start": "node --env-file=.env index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
