@@ -1,0 +1,21 @@
+{
+  "name": "005-http",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node --env-file=.env index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.4.2"
+  },
+  "engines": {
+    "node": "^20"
+  },
+  "dependencies": {
+    "@types/node": "^20.11.25"
+  }
+}
