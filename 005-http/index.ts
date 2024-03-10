@@ -9,9 +9,11 @@ rl.question(`Input city: `, (input) => {
   fetch(`http://api.weatherapi.com/v1/current.json?key=${config.API_KEY}&q=${input}&aqi=no`)
     .then(response => response.json())
     .then((json) => {
-      const temp = json?.current?.temp_c?.toString() || ''
+      let temp = json?.current?.temp_c?.toString() || ''
       const condition = json?.current?.condition?.text || ''
-      const humidity = json?.current?.humidity?.toString() || ''
+      let humidity = json?.current?.humidity?.toString() || ''
+      temp += ' C°'
+      humidity += ' %'
       console.log(`
 +----------------------------------+---------+------------------------+----------------+
 |City                              |Temp     |Condition               |Humidity        |
