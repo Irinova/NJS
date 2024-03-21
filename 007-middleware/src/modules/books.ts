@@ -1,26 +1,28 @@
-import {Book} from "../types/Book";
+import { Book } from "../types/Book";
 import Users from "./user";
-import {getMockBooks} from "../utils/getMockBooks";
-import {generateId} from "../utils/generateId";
-
+import { getMockBooks } from "../utils/getMockBooks";
+import { generateId } from "../utils/generateId";
+import { Router } from "express";
+const fileMulter = require('../middleware/file');
 const express = require("express");
-// @ts-ignore
-const router = express.Router();
 
 class Books {
-
-  constructor() {}
+  router
+  constructor() {
+    // @ts-ignore
+    this.router = express.Router();
+  }
 
   data: Book[] = getMockBooks()
 
-  getAllBooks() {
-    router.get("/", (req: any, res: any) => {
+  private getAllBooks() {
+    this.router.get("/", (req, res) => {
       res.json(this.data)
     });
   }
 
-  getBook() {
-    router.get("/:id", (req: any, res: any) => {
+  private getBook() {
+    this.router.get("/:id", (req, res) => {
       const id = req.params?.id
       const book = this.data.find((book) => book.id === id)
       if (!book) {
@@ -31,16 +33,19 @@ class Books {
     });
   }
 
-  updateBook() {
-    router.put("/:id", (req: any, res: any) => {
+  private updateBook() {
+    this.router.put("/:id", fileMulter.single('cover-img'),(req, res) => {
       const updatedBookFields = req.body
-      const book = this.data.find((book) => book.id === updatedBookFields?.id)
+      const id = req.params?.id
+      const book = this.data.find((book) => book.id === id)
       if (!book) {
         res.send(404)
       } else {
         const updatedBook = {
           ...book,
-          ...updatedBookFields
+          ...updatedBookFields,
+          id,
+          fileBook: `public/img/${req.file?.filename}`
         }
         this.data = this.data.map(book => {
           if (book.id === updatedBook.id) {
@@ -53,8 +58,8 @@ class Books {
     });
   }
 
-  deleteBook() {
-    router.delete("/:id", (req: any, res: any) => {
+  private deleteBook() {
+    this.router.delete("/:id", (req, res) => {
       const deletedBookId = req.params?.id
       const book = this.data.find((book) => book.id === deletedBookId)
       if (!book) {
@@ -68,14 +73,15 @@ class Books {
     });
   }
 
-  createBook() {
-    router.post("/", (req: any, res: any) => {
+  private createBook() {
+    this.router.post("/", fileMulter.single('cover-img'), (req, res) => {
       const book = req.body
       if (!book.title) {
         res.send(500)
       } else {
-        const generatedBook = {
+        const generatedBook: Book = {
           ...book,
+          fileBook: `public/img/${req.file?.filename}`,
           id: generateId()
         }
         this.data.push(generatedBook)
@@ -83,21 +89,34 @@ class Books {
       }
     });
   }
+  private getBookCover() {
+    this.router.get("/:id/download", (req, res) => {
+      const bookId = req.params?.id
+      const book = this.data.find((book) => book.id === bookId)
+      if (!book || !book.fileBook) {
+        res.send(404)
+      } else {
+        const file = `${__dirname}/../${book.fileBook}`
+        res.download(file)
+      }
+    });
+  }
 
-  generateRoutes(user: Users) {
-    router.get("*", (req: any, res: any, next: any) => {
+  generateRoutes(user: Users): Router {
+    this.router.get("*", (req: any, res: any, next: any) => {
       if (!user.currentUser()) {
         res.send(401)
       } else {
         next()
       }
     });
+    this.getBookCover()
     this.getBook()
     this.getAllBooks()
     this.createBook()
     this.updateBook()
     this.deleteBook()
-    return router
+    return this.router
   }
 }
 
