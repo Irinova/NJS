@@ -8,7 +8,8 @@ export const getMockBooks = (): Book[] => [
     authors: "John Smith",
     favorite: "string",
     fileCover: "string",
-    fileName: "my-first-book"
+    fileName: "my-first-book",
+    fileBook: "public/img/1711008952154-invalid_as_picture.jpg"
   },
   {
     id: "fe-123-456",
@@ -17,6 +18,7 @@ export const getMockBooks = (): Book[] => [
     authors: "John Smith",
     favorite: "string",
     fileCover: "string",
-    fileName: "my-second-book"
+    fileName: "my-second-book",
+    fileBook: "public/img/1711008952154-invalid_as_picture.jpg"
   }
 ]
