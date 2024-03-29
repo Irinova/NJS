@@ -9,7 +9,7 @@ export const getMockBooks = (): Book[] => [
     favorite: "string",
     fileCover: "string",
     fileName: "my-first-book",
-    fileBook: "public/img/1711008952154-invalid_as_picture.jpg"
+    fileBook: "public/img/book.webp"
   },
   {
     id: "fe-123-456",
@@ -19,6 +19,6 @@ export const getMockBooks = (): Book[] => [
     favorite: "string",
     fileCover: "string",
     fileName: "my-second-book",
-    fileBook: "public/img/1711008952154-invalid_as_picture.jpg"
+    fileBook: "public/img/book.webp"
   }
 ]
