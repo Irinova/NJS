@@ -1,12 +1,13 @@
-import {User} from "../types/User";
-
+import { User } from "../types/User";
+import { Router } from "express";
 const express = require("express");
-// @ts-ignore
-const router = express.Router();
 
 class Users {
-
-  constructor() {}
+  router
+  constructor() {
+    // @ts-ignore
+    this.router = express.Router();
+  }
 
   data: User[] = [
     { name: 'Ivan', password: '123' },
@@ -32,8 +33,8 @@ class Users {
     this.user = undefined
   }
 
-  post() {
-    router.post("/login", (req: any, res: any) => {
+  private post() {
+    this.router.post("/login", (req: any, res: any) => {
       const name = req.body?.name
       const password = req.body?.password
       const user = this.findUser( { name, password })
@@ -47,9 +48,9 @@ class Users {
     });
   }
 
-  generateRoutes() {
+  generateRoutes(): Router {
     this.post()
-    return router
+    return this.router
   }
 }
 
