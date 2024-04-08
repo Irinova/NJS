@@ -1,13 +1,13 @@
 import { Express } from "express";
 import { createScreensRouter } from "../routes/screens";
 import ScreensController from "../controllers/screensController";
-import {User} from "../types/User";
+import User from "../modules/user";
 import {BooksModel} from "../models/booksModel";
 
 class Screens {
-  constructor(app: Express, currentUser: () => User | undefined, booksModel: BooksModel) {
+  constructor(app: Express, user: User, booksModel: BooksModel) {
     const controller = new ScreensController()
-    app.use('/', createScreensRouter(controller, currentUser, booksModel))
+    app.use('/', createScreensRouter(controller, user, booksModel))
     app.use((err: any, req: any, res: any, next: any) => {
       console.error(err)
       next()

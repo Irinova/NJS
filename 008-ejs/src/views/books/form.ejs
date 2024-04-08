@@ -1,4 +1,4 @@
-<form method="POST" class="mt-5">
+<form method="POST" class="mt-5" enctype="multipart/form-data">
     <div class="form-group">
         <label for="inputTitle">Заголовок</label>
         <input type="text"
@@ -16,6 +16,14 @@
                 class="form-control"
                 id="inputDesc"
         ><%= book.description %></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="inputTitle">Файл</label>
+        <input type="file"
+               name="cover-img"
+               class="form-control"
+               id="inputFile">
     </div>
 
     <div class="form-group text-right ">

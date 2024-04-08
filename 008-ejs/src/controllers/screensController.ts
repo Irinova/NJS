@@ -4,7 +4,11 @@ import {Book} from "../types/Book";
 
 class ScreensController {
 
-  getAllBooks = (req, res, booksModel: BooksModel) => {
+  loginView = (req, res) => {
+    res.render("../src/views/login", { title: 'Вход в личный кабинет' });
+  }
+
+  getAllBooksView = (req, res, booksModel: BooksModel) => {
     const books = booksModel.getAllBooks()
     res.render("../src/views/books/index", {
       title: "Список книг",
@@ -12,7 +16,7 @@ class ScreensController {
     });
   };
 
-  getBook = (req, res, booksModel: BooksModel) => {
+  getBookView = (req, res, booksModel: BooksModel) => {
     const id = req.params?.id
     const book = booksModel.getBook(id)
     if (!book) {

@@ -16,6 +16,9 @@ class Users {
   currentUser = (): User | undefined =>  {
     return this.controller.currentUser()
   }
+  setUser = (req, res): User | undefined =>  {
+    return this.controller.setUser(req, res)
+  }
 }
 
 export default Users

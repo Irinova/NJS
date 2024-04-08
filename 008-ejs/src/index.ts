@@ -13,7 +13,7 @@ app.use('/public', express.static(__dirname+'/public'))
 
 const user = new User(app)
 const books = new Books(app, user.currentUser)
-const screens = new Screens(app, user.currentUser, books.controller.booksModel)
+const screens = new Screens(app, user, books.controller.booksModel)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
