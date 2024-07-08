@@ -1,0 +1,11 @@
+1, 2) docker run --name first_node --env NAME=Irina --env SURNAME=Zakharova -v /Users/irina/NJS/data:/data  -it node:15.14
+3) docker run --name second_node --env NAME=Irina --env SURNAME=Zakharova -v /Users/irina/NJS/data:/data  -it node:15.14
+4) docker exec -it first_node /bin/bash
+   touch 1.txt
+6) docker exec -it second_node /bin/bash
+   ls
+7) docker stop first_node
+   docker stop second_node
+8) docker rm first_node
+   docker rm second_node
+9) docker rmi node:15.14

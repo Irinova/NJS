@@ -1,0 +1,11 @@
+1.1) docker run --name mynode --env NAME=Irina --env SURNAME=Zakharova -it node:15.14
+
+Welcome to Node.js v15.14.0.
+Type ".help" for more information.
+
+1.2) console.log('Привет, ' + process.env.NAME + ' ' process.env.SURNAME + '!')
+
+> Привет, Irina Zakharova!
+
+2) docker stop mynode
+3) docker rm mynode
