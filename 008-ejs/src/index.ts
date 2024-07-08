@@ -4,7 +4,7 @@ import Books from "./modules/books";
 import Screens from "./modules/screens";
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 app.use(express.json())
 app.set("view engine", "ejs");

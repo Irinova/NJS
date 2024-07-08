@@ -1,0 +1,83 @@
+1.2) docker run --name pinger busybox -i -t ping -c 7 netology.ru
+
+PING netology.ru (188.114.99.224): 56 data bytes
+64 bytes from 188.114.99.224: seq=0 ttl=37 time=21.736 ms
+64 bytes from 188.114.99.224: seq=1 ttl=37 time=10.764 ms
+64 bytes from 188.114.99.224: seq=2 ttl=37 time=11.321 ms
+64 bytes from 188.114.99.224: seq=3 ttl=37 time=10.977 ms
+64 bytes from 188.114.99.224: seq=4 ttl=37 time=10.154 ms
+64 bytes from 188.114.99.224: seq=5 ttl=37 time=10.924 ms
+64 bytes from 188.114.99.224: seq=6 ttl=37 time=8.855 ms
+
+
+3. docker ps -a
+
+3e4add77a4cb   busybox                                 "ping -c 7 netology.…"   2 minutes ago   Exited (0) 2 minutes ago                                                      pinger
+
+
+4. docker logs pinger
+
+PING netology.ru (188.114.99.224): 56 data bytes
+64 bytes from 188.114.99.224: seq=0 ttl=37 time=21.736 ms
+64 bytes from 188.114.99.224: seq=1 ttl=37 time=10.764 ms
+64 bytes from 188.114.99.224: seq=2 ttl=37 time=11.321 ms
+64 bytes from 188.114.99.224: seq=3 ttl=37 time=10.977 ms
+64 bytes from 188.114.99.224: seq=4 ttl=37 time=10.154 ms
+64 bytes from 188.114.99.224: seq=5 ttl=37 time=10.924 ms
+64 bytes from 188.114.99.224: seq=6 ttl=37 time=8.855 ms
+
+
+5. docker start -a pinger
+
+PING netology.ru (188.114.98.224): 56 data bytes
+64 bytes from 188.114.98.224: seq=0 ttl=37 time=8.571 ms
+64 bytes from 188.114.98.224: seq=1 ttl=37 time=8.677 ms
+64 bytes from 188.114.98.224: seq=2 ttl=37 time=13.168 ms
+64 bytes from 188.114.98.224: seq=3 ttl=37 time=14.922 ms
+64 bytes from 188.114.98.224: seq=4 ttl=37 time=15.893 ms
+64 bytes from 188.114.98.224: seq=5 ttl=37 time=15.964 ms
+64 bytes from 188.114.98.224: seq=6 ttl=37 time=14.772 ms
+
+
+6. docker ps -a
+
+CONTAINER ID   IMAGE                                   COMMAND                  CREATED          STATUS                       PORTS                                            NAMES
+3e4add77a4cb   busybox                                 "ping -c 7 netology.…"   15 minutes ago   Exited (0) 4 minutes ago
+
+
+7. docker logs pinger
+
+PING netology.ru (188.114.99.224): 56 data bytes
+64 bytes from 188.114.99.224: seq=0 ttl=37 time=21.736 ms
+64 bytes from 188.114.99.224: seq=1 ttl=37 time=10.764 ms
+64 bytes from 188.114.99.224: seq=2 ttl=37 time=11.321 ms
+64 bytes from 188.114.99.224: seq=3 ttl=37 time=10.977 ms
+64 bytes from 188.114.99.224: seq=4 ttl=37 time=10.154 ms
+64 bytes from 188.114.99.224: seq=5 ttl=37 time=10.924 ms
+64 bytes from 188.114.99.224: seq=6 ttl=37 time=8.855 ms
+
+PING netology.ru (188.114.99.224): 56 data bytes
+64 bytes from 188.114.99.224: seq=0 ttl=37 time=21.736 ms
+64 bytes from 188.114.99.224: seq=1 ttl=37 time=10.764 ms
+64 bytes from 188.114.99.224: seq=2 ttl=37 time=11.321 ms
+64 bytes from 188.114.99.224: seq=3 ttl=37 time=10.977 ms
+64 bytes from 188.114.99.224: seq=4 ttl=37 time=10.154 ms
+64 bytes from 188.114.99.224: seq=5 ttl=37 time=10.924 ms
+64 bytes from 188.114.99.224: seq=6 ttl=37 time=8.855 ms
+
+
+8. docker logs pinger -n PING
+   docker logs pinger | grep -c seq
+
+
+9. docker rm pinger
+
+pinger
+
+
+10. docker rmi busybox
+
+Untagged: busybox:latest
+Untagged: busybox@sha256:c3839dd800b9eb7603340509769c43e146a74c63dca3045a8e7dc8ee07e53966
+Deleted: sha256:ba5dc23f65d4cc4a4535bce55cf9e63b068eb02946e3422d3587e8ce803b6aab
+Deleted: sha256:95c4a60383f7b6eb6f7b8e153a07cd6e896de0476763bef39d0f6cf3400624bd
