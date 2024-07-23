@@ -1,0 +1,21 @@
+services:
+  storage:
+    image: redis
+    volumes:
+      - ./data:/data
+  counter:
+    image: node:20.10
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - 80:4000
+    environment:
+      - PORT=4000
+      - REDIS_URL=redis://storage
+    depends_on:
+      - storage
+    links:
+      - storage
+volumes:
+  logs_data: {}
