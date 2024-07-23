@@ -32,6 +32,26 @@ class BooksController {
     }
   }
 
+  getCounter = async (req, res, client) => {
+    const id = req.params?.id
+    try {
+      const value = await client.get(id);
+      res.json({ value })
+    } catch (e) {
+      console.error(e)
+      res.sendStatus(500)
+    }
+  }
+  updateCounter = async (req, res, client) => {
+    const id = req.params?.id
+    try {
+      await client.incr(id)
+      res.sendStatus(200)
+    } catch (e) {
+      res.sendStatus(500)
+    }
+  }
+
   deleteBook = (req, res) => {
     const deletedBookId = req.params?.id
     const books = this.booksModel.deleteBook(deletedBookId)

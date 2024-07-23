@@ -4,7 +4,7 @@ services:
     volumes:
       - ./data:/data
   counter:
-    image: node:20.10
+    image: njs
     working_dir: /app
     volumes:
       - ./:/app
@@ -13,6 +13,7 @@ services:
     environment:
       - PORT=4000
       - REDIS_URL=redis://storage
+    entrypoint: ["node", "./dist/index.js"]
     depends_on:
       - storage
     links:

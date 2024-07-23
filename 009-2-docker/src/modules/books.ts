@@ -5,9 +5,9 @@ import {User} from "../types/User";
 
 class Books {
   controller
-  constructor(app: Express, currentUser: () => User | undefined) {
+  constructor(app: Express, currentUser: () => User | undefined, client: any) {
     this.controller = new BooksController()
-    app.use('/api/books', createBooksRouter(this.controller, currentUser))
+    app.use('/api/books', createBooksRouter(this.controller, currentUser, client))
     app.use((err: any, req: any, res: any, next: any) => {
       console.error(err)
       next()
