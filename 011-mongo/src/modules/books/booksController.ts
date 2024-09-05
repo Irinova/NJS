@@ -71,9 +71,9 @@ class BooksController {
     }
   }
 
-  getBookCover = (req, res) => {
+  getBookCover = async (req, res) => {
     const bookId = req.params?.id
-    const file = this.booksModel.getBookCover(bookId)
+    const file = await this.booksModel.getBookCover(bookId)
     if (!file) {
       res.send(404)
     } else {

@@ -1,12 +1,9 @@
 import {BookType} from "./BookType";
-import {getMockBooks} from "../../utils/getMockBooks";
 import {generateId} from "../../utils/generateId";
 import {Book} from './BookSchema'
 
 export class BooksModel {
   constructor() {}
-
-  books: BookType[] = getMockBooks()
 
   getAllBooks = () => {
     return Book.find()
@@ -57,13 +54,12 @@ export class BooksModel {
     }
   }
 
-  getBookCover = (bookId: string) => {
-    const book = this.books.find((book) => book.id === bookId)
-    if (!book || !book.fileBook) {
+  getBookCover = async (id: string) => {
+    const fileBook = Book.find({ id }).select('fileBook')
+    if (!fileBook) {
       return false
     } else {
-      const file = `${__dirname}/../${book.fileBook}`
-      return file
+      return `${__dirname}/../${fileBook}`
     }
   }
 }
