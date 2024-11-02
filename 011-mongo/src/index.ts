@@ -4,7 +4,7 @@ import Books from "./modules/books/books";
 import Screens from "./modules/screens/screens";
 import { Book } from "./modules/books/BookSchema";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const app: Express = express();
 const port = process.env.PORT || 4000;
@@ -15,22 +15,21 @@ let client;
 const initializeMongoDB = async () => {
   try {
     client = await mongoose.connect(MONGODB_URL);
-  } catch(e) {
-    console.error(e)
+  } catch (e) {
+    console.error(e);
   }
-}
-
+};
 
 initializeMongoDB().then(() => {
-  app.use(express.json())
+  app.use(express.json());
   app.set("view engine", "ejs");
   app.use(express.urlencoded());
-  app.use('/public', express.static(__dirname+'/public'))
+  app.use("/public", express.static(__dirname + "/public"));
 
-  const user = new User(app)
-  const books = new Books(app, user.currentUser, client)
-  const screens = new Screens(app, user, books.controller.booksModel)
-})
+  const user = new User(app);
+  const books = new Books(app, user.currentUser, client);
+  const screens = new Screens(app, user, books.controller.booksModel);
+});
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
