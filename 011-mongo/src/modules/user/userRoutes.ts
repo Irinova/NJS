@@ -9,7 +9,7 @@ export const createUserRouter = (usersController: UserController): Router => {
     passport.authenticate("local", { failureRedirect: "/login" }),
     (req, res) => {
       console.log("req.user: ", (req as any).user);
-      res.redirect("/");
+      res.json((req as any).user);
     }
   );
   return router;

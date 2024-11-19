@@ -32,6 +32,18 @@ class Users {
     app.use(passport.session())
 
     app.use("/api/user", createUserRouter(this.controller));
+    app.get('/api/profile',
+      (req: any, res, next) => {
+        console.log('req.isAuthenticated', req.isAuthenticated())
+        if (!req.isAuthenticated()) {
+          return res.sendStatus(401)
+        }
+        next()
+      },
+      (req: any, res) => {
+        res.json({ user: req.user });
+      }
+  )
     app.use((err: any, req: any, res: any, next: any) => {
       console.error(err);
       next();

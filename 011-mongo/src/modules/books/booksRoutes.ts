@@ -5,14 +5,15 @@ const fileMulter = require('../../middleware/file');
 
 export const createBooksRouter = (booksController: BooksController, currentUser: () => UserType | undefined, client: any): Router => {
   const router = Router();
-  // router.get("*", (req: any, res: any, next: any) => {
-  //   if (!currentUser()) {
-  //     // res.send(401)
-  //     res.json({ error: "unauthorized" })
-  //   } else {
-  //     next()
-  //   }
-  // })
+  router.get('*',
+    (req: any, res, next) => {
+      console.log('req.isAuthenticated111', req.isAuthenticated())
+      if (!req.isAuthenticated()) {
+        return res.sendStatus(401)
+      }
+      next()
+    }
+)
   router.get("/", booksController.getAllBooks)
   router.get("/:id", booksController.getBook)
   router.get("/:id/incr", (req, res) => booksController.getCounter(req, res, client))

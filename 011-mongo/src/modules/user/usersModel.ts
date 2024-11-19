@@ -1,7 +1,5 @@
 import { User } from "./UserSchema";
 import { UserType } from "./UserType";
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 
 export class UsersModel {
   constructor() {}
